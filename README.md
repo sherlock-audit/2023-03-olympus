@@ -74,4 +74,11 @@ A: [ACCEPTABLE/NOT ACCEPTABLE]
 
 # Audit scope
 
+
+[sherlock-olympus @ d6cbc99b4c2476efa74df01ed57c9be00a3c4467](https://github.com/0xLienid/sherlock-olympus/tree/d6cbc99b4c2476efa74df01ed57c9be00a3c4467)
+- [sherlock-olympus/src/policies/BoostedLiquidity/BLVaultLido.sol](sherlock-olympus/src/policies/BoostedLiquidity/BLVaultLido.sol)
+- [sherlock-olympus/src/policies/BoostedLiquidity/BLVaultManagerLido.sol](sherlock-olympus/src/policies/BoostedLiquidity/BLVaultManagerLido.sol)
+
+
+
 # About [project name]
