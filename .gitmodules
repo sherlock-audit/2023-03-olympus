@@ -1,0 +1,12 @@
+[submodule "sherlock-olympus/lib/ds-test"]
+	path = sherlock-olympus/lib/ds-test
+	url = https://github.com/dapphub/ds-test
+[submodule "sherlock-olympus/lib/solmate"]
+	path = sherlock-olympus/lib/solmate
+	url = https://github.com/Rari-Capital/solmate
+[submodule "sherlock-olympus/lib/forge-std"]
+	path = sherlock-olympus/lib/forge-std
+	url = https://github.com/brockelmore/forge-std
+[submodule "sherlock-olympus/lib/clones-with-immutable-args"]
+	path = sherlock-olympus/lib/clones-with-immutable-args
+	url = https://github.com/wighawag/clones-with-immutable-args
