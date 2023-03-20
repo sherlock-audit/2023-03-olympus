@@ -1,4 +1,3 @@
-
 # OlympusDAO Contest Details (03/2023)
 
 - Join [Sherlock Discord](https://discord.gg/MABEWyASkp)
@@ -23,7 +22,7 @@ You can reference these audits here:
   - [Audit Report](https://hackmd.io/@12og4u7y8i/HJVAPMlno)
 
 ## On-chain context
- 
+
 ```
 DEPLOYMENT: mainnet
 ERC20: OHM, wstETH, LDO, BAL, AURA
@@ -35,47 +34,22 @@ ADMIN: trusted
 EXTERNAL-ADMINS: n/a
 ```
 
+In case of restricted functions, by default Sherlock does not consider direct protocol rug pulls as a valid issue unless the protocol clearly describes in detail the conditions for these restrictions.
+For contracts, owners, admins clearly distinguish the ones controlled by protocol vs user controlled. This helps watsons distinguish the risk factor.
 
-Please answer the following questions to provide more context: 
-### Q: Are there any additional protocol roles? If yes, please explain in detail:
-1) The roles
-2) The actions those roles can take 
-3) Outcomes that are expected from those roles 
-4) Specific actions/outcomes NOT intended to be possible for those roles
-
-A: Not related to this set of contracts.
-
-___
-### Q: Is the code/contract expected to comply with any EIPs? Are there specific assumptions around adhering to those EIPs that Watsons should be aware of?
-A: No.
-
-___
-
-### Q: Please list any known issues/acceptable risks that should not result in a valid finding.
-A: Balancer or Aura puasing operations
-
-____
-### Q: Please provide links to previous audits (if any).
-A: A prior version of this system was audited by [Kebabsec](https://hackmd.io/@12og4u7y8i/HJVAPMlno), and a second audit of that version of this system was audited in a prior [Sherlock Contest](https://app.sherlock.xyz/audits/contests/50)
-
-___
-
-### Q: Are there any off-chain mechanisms or off-chain procedures for the protocol (keeper bots, input validation expectations, etc)? 
-A: No, just a basic frontend implementation
-_____
-
-### Q: In case of external protocol integrations, are the risks of an external protocol pausing or executing an emergency withdrawal acceptable? If not, Watsons will submit issues related to these situations that can harm your protocol's functionality. 
-A: NOT ACCEPTABLE 
-
+- The address(es) with`liquidityvault_admin` permissions in `BLVaultManagerLido.sol` are owned by the protocol and is used to update configurations, and pause the system in-case of emergency.
 
 ## Audit scope
 
+The contracts in-scope for this audit are:
 
-[sherlock-olympus @ e502fe566516f358141118a40f1c02e014f8b27c](https://github.com/0xLienid/sherlock-olympus/tree/e502fe566516f358141118a40f1c02e014f8b27c)
-- [sherlock-olympus/src/policies/BoostedLiquidity/BLVaultLido.sol](sherlock-olympus/src/policies/BoostedLiquidity/BLVaultLido.sol)
-- [sherlock-olympus/src/policies/BoostedLiquidity/BLVaultManagerLido.sol](sherlock-olympus/src/policies/BoostedLiquidity/BLVaultManagerLido.sol)
-- [sherlock-olympus/src/policies/BoostedLiquidity/interfaces/IBLVaultLido.sol](sherlock-olympus/src/policies/BoostedLiquidity/interfaces/IBLVaultLido.sol)
-- [sherlock-olympus/src/policies/BoostedLiquidity/interfaces/IBLVaultManagerLido.sol](sherlock-olympus/src/policies/BoostedLiquidity/interfaces/IBLVaultManagerLido.sol)
+```ml
+src
+├─ policies
+|   ├─ BoostedLiquidity
+|   |   ├─ BLVaultLido.sol
+|   |   ├─ BLVaultManagerLido.sol
+```
 
 The in-scope contracts depend on these previously audited and external contracts:
 
@@ -168,4 +142,3 @@ The BLV system is built using one central manager contracts and then a series of
 - BLVs should behave as more efficient liquidity mining vehicles for partners. Initially Olympus will take no portion of the rewards provided by the partner protocol (and down the road will not take more than a small percentage). Thus the partner gets 2x TVL for its rewards relative to what it would get in a traditional liquidity mining system. Similarly, the depositor gets 2x rewards relative to what they would get in a traditional liquidity mining system. The depositor effectively receives 2x leverage on reward accumulation without 2x exposure to the underlying (and thus has no liquidation risk).
 - Users of BLVs will experience identical impermanent loss (in dollar terms) as if they had split their pair token deposit into 50% OHM - 50% pair token and LP'd.
 - In theory this system could be gamed by single-sided depositing through the vault, performing a large swap (either via user balance, a large loan, or a flash loan) to shift more of the LP into wstETH, then exiting the pool. To mitigate this the contract checks the withdrawn ratios of OHM and wstETH against the current oracle price and takes any wstETH shifted imbalance as a fee to the treasury. The math used to accomplish this slightly weights the exchange rate further in favor of the treasury rather than reverse engineering the invariant math to get an exact exchange rate since in most scenarios these discrepancies will be very small and it's more effective at dissuading large attempts to shift the pool around. It also does this without actually rebalancing the pool.
-
