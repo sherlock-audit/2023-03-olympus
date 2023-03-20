@@ -112,7 +112,7 @@ The BLV system is built using one central manager contracts and then a series of
 
 ### Diagram of Main User Flows
 
-![user flows diagram](documentation/BLVProcesses.png)
+![user flows diagram](sherlock-olympus/documentation/BLVProcesses.png)
 
 ### Boosted Liquidity Vault Security Considerations
 
